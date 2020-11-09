@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+
+    <style>
+        #comment-list{
+            border: 5px solid black;
+            padding: 10px;
+        }
+
+        #comment-list >div{
+            border:2px solid red;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="comment-list">
+        <div id="item-1">
+            <span id="comment-1">댓글 1</span>
+            <span id="comment-delete-1" onclick="deleteComment(1)">삭제</span>
+        </div>
+        <div id="item-2">
+            <span id="comment-2">댓글 2</span>
+            <span id="comment-delete-2" onclick="deleteComment(2)">삭제</span>
+        </div>
+    </div>
+    <hr>
+    <input type="text" id="input-comment"/>
+    <button onclick="addCommnet()">댓글추가</button>
+
+    <script>
+        var no=3;
+
+        function delteComment(id){
+            // $("#item-"+id).remove();
+            // `"#item-{id}" remove();`
+            $(`#item-${id}`).remove();
+        }
+
+        //append,prepend,ater,before
+        function addCommnet(){
+            
+            var comment =$("#input-comment").val();
+            //변수를 가지고노는방법
+            //(1)백틱 " ${변수}"
+            //(2)+연산자로 변수더하기
+
+            var commentitem=`<div id="item-${no}">`;
+                commentitem=commentitem+`<span id = "comment-${no}">${comment}`;
+                commentitem=commentitem+`<span id="comment-delete-${no}" onclick="deleteComment(${no})">삭제</span>`;
+                commentitem=commentitem+`</div>`;
+                    
+
+            $("#comment-list").prepend(commentitem);
+            no=no+1;
+            
+            $("#input-comment").val("");
+                }
+
+
+    </script>
+
+</body>
+</html>
